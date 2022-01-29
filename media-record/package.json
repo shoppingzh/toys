@@ -3,20 +3,23 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build --base=/audio/",
+    "build": "vite build --base=/media/",
     "preview": "vite preview"
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.16.7",
+    "ant-design-vue": "^2.2.8",
     "less": "^4.1.2",
     "tongpo": "^0.0.17",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.5",
     "tailwindcss": "^3.0.17",
+    "unplugin-vue-components": "^0.17.15",
     "vite": "^2.7.2"
   }
 }

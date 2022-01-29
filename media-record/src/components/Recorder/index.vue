@@ -1,25 +1,23 @@
 <script setup>
-import { getUserMedia } from 'tongpo/lib/media'
-import { computed, onUnmounted, ref } from 'vue'
+import { computed, onUnmounted, ref, watch } from 'vue'
 import RecorderButton from './RecorderButton.vue'
 import Button from '../Button/index.vue'
+import useUserMedia from '@/hooks/useUserMedia'
+import { download } from '@/utils/file'
+import { playAudio } from '@/utils/media'
+
+const { stream, start: startCapture, stop: stopCapture } = useUserMedia({ audio: true })
 
 const active = ref(false)
 let blobParts = null
-let stream = null
 let mr = null
 const url = ref(null)
-
 const hasAudio = computed(() => !!url.value)
 
-const start = async() => {
+const startRecord = () => {
   try {
     blobParts = []
-    stream = await getUserMedia({ audio: true })
-    stream.oninactive = e => {
-      active.value = false
-    }
-    mr = new MediaRecorder(stream, {})
+    mr = new MediaRecorder(stream.value, {})
     mr.ondataavailable = e => {
       blobParts.push(e.data)
     }
@@ -35,31 +33,23 @@ const start = async() => {
   }
 }
 
+watch(stream, newVal => {
+  if (newVal) {
+    startRecord()
+  } else {
+    active.value = false
+  }
+})
+
 const stop = () => {
   mr && mr.stop()
-  stream && stream.getTracks().forEach(t => t.stop())
+  stopCapture()
   active.value = false
 }
 
 const toggle = async() => {
   if (active.value) return stop()
-  start()
-}
-
-const download = () => {
-  const el = document.createElement('a')
-  el.download = '录音.mp3'
-  el.href = url.value
-  el.style.display = 'none'
-  el.click()
-}
-
-const play = () => {
-  const el = document.createElement('audio')
-  el.src = url.value
-  el.style.display = 'none'
-  document.body.appendChild(el)
-  el.play()
+  startCapture()
 }
 
 const remove = () => {
@@ -83,10 +73,10 @@ onUnmounted(() => {
           <recorder-button :active="active" @click="toggle">hello</recorder-button>
         </div>
         <div class="tw-w-full tw-h-0 tw-flex-1 tw-mt-10 tw-flex tw-items-end tw-justify-around">
-          <Button :disabled="!hasAudio" @click="download">
+          <Button :disabled="!hasAudio" @click="download(url, '新录音.mp3')">
             <i class="iconfont icon-xiazai" />
           </Button>
-          <Button :disabled="!hasAudio" @click="play">
+          <Button :disabled="!hasAudio" @click="playAudio(url)">
             <i class="iconfont icon-bofang" />
           </Button>
           <Button :disabled="!hasAudio" @click="remove">
