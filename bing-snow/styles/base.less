@@ -1,0 +1,55 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: rgba(50, 50, 50);
+  background-image: url('../bg/1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, .1);
+}
+
+.button {
+  @size: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 50;
+  top: 50%;
+  margin-top: (-@size / 2);
+  width: @size;
+  height: @size;
+  border-radius: 50%;
+  color: rgb(200, 200, 200);
+  font-size: 50px;
+  background-color: rgba(100, 100, 100, .5);
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  &:hover {
+    background-color: rgba(100, 100, 100, .8);
+    transform: scale(1.05);
+  }
+  &::before, &::after {
+    content: "";
+    position: absolute;
+  }
+  &-prev {
+    left: 30px;
+  }
+  &-next {
+    right: 30px;
+  }
+}
