@@ -4,11 +4,11 @@ import GestureLock from './gesture-lock'
 
 const canvas = ref(null)
 onMounted(() => {
-  canvas.value.width = 400
-  canvas.value.height = 500
+  canvas.value.width = 600
+  canvas.value.height = 600
   new GestureLock(canvas.value, {
-    rows: 3,
-    cols: 3
+    rows: 5,
+    cols: 5
   })
 })
 </script>
