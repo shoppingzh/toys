@@ -7,8 +7,8 @@ onMounted(() => {
   canvas.value.width = 600
   canvas.value.height = 600
   new GestureLock(canvas.value, {
-    rows: 5,
-    cols: 5
+    rows: 3,
+    cols: 3
   })
 })
 </script>

@@ -34,15 +34,15 @@ class Node {
     }
     this.center = [this.bounds.x + this.bounds.size / 2, this.bounds.y + this.bounds.size / 2]
     this._active = false
-    Object.defineProperty(this, 'active', {
-      get() {
-        return this._active
-      },
-      set(val) {
-        this._active = val
-      }
-    })
     this._init()
+  }
+
+  get active() {
+    return this._active
+  }
+
+  set active(val) {
+    this._active = val
   }
 
   _init() {
