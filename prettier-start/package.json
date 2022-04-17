@@ -1,0 +1,13 @@
+{
+  "name": "prettier-start",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "code": "npx prettier --write ."
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.13.0",
+    "prettier": "^2.6.2"
+  }
+}
