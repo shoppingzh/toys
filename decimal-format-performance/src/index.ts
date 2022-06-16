@@ -12,7 +12,7 @@ function random(max: number = 10000) {
   return Math.random() * max
 }
 
-const numbers = new Array(10000).fill(0).map(o => random())
+const numbers = new Array(100000).fill(0).map(o => random())
 const loopCount = 10
 const times = formats.map(o => new Array(loopCount).fill(0))
 
