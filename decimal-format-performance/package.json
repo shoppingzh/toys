@@ -1,0 +1,14 @@
+{
+  "name": "decimal-format-performance",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.7.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "play": "node ./dist/index.js",
+    "dev": "yarn build && yarn play"
+  }
+}
