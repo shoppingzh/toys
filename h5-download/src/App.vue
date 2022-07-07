@@ -25,12 +25,16 @@ const a = () => {
 
 const iframe = () => {
   const el = document.createElement('iframe')
-  el.src = url
+  // el.src = url
   el.style.display = 'none'
-  el.onload = () => {
-    console.log('load')
-  }
+  el.contentWindow?.document.addEventListener('readystatechange', e => {
+    console.log(e)
+  })
+  el.contentWindow?.addEventListener('load', e => {
+    console.log(e)
+  })
   document.body.appendChild(el)
+  el.contentWindow.location.href = url
 }
 </script>
 
