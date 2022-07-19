@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="canvas" width="1000" height="500" />
+  <canvas ref="canvas" />
   我是网页内容
 </template>
 
@@ -7,6 +7,7 @@
 import { onMounted, ref } from 'vue'
 
 const canvas = ref<HTMLCanvasElement>(null)
+const text: string = 'Shoppingzh'
 
 function measure(ctx: CanvasRenderingContext2D, text: string) {
   const { width } = ctx.measureText(text)
@@ -16,8 +17,34 @@ function measure(ctx: CanvasRenderingContext2D, text: string) {
   }
 }
 
+function createWatermark(text: string) {
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')
+  canvas.width = 300
+  canvas.height = 200
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.translate(canvas.width / 2, canvas.height / 2)
+  ctx.rotate(-45 * Math.PI / 180)
+  ctx.font = `20px bold 微软雅黑`
+  ctx.fillStyle = 'rgba(100, 100, 100, .2)'
+  ctx.fillText(text, 0, 0)
+  return canvas
+}
 
-onMounted(() => {
+function renderWatermark() {
+  const ctx = canvas.value.getContext('2d')
+  canvas.value.width = canvas.value.clientWidth
+  canvas.value.height = canvas.value.clientHeight
+  const { width, height } = canvas.value
+
+  const watermark = createWatermark(text)
+  const pattern = ctx.createPattern(watermark, 'repeat')
+  ctx.fillStyle = pattern
+  ctx.fillRect(0, 0, width, height)
+}
+
+function renderWatermark2() {
   const ctx = canvas.value.getContext('2d')
   canvas.value.width = canvas.value.clientWidth
   canvas.value.height = canvas.value.clientHeight
@@ -45,6 +72,12 @@ onMounted(() => {
       ctx.fillText(text, x, y)
     }
   }
+}
+
+
+onMounted(() => {
+  // renderWatermark()
+  renderWatermark2()
 })
 
 </script>
