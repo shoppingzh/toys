@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    input {
+      width: 300px;
+      height: 40px;
+      outline: none;
+      border: 1px solid #ddd;
+      padding: 5px 12px;
+      border-radius: 5px;
+      box-shadow: 3px 3px 20px 2px rgba(0, 0, 0, .1);
+      font-size: 18px;
+      letter-spacing: 1.2px;
+    }
+    input::placeholder {
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <input>
+
+  <script>
+    let current = 0
+    const text = 'Cat is a cute animal.'
+    const el = document.querySelector('input')
+
+    function loop() {
+      const end = ++current > text.length
+
+      if (end) {
+        current = 0
+      }
+      const cursor = !end && current % 2 === 0
+      setTimeout(() => {
+        el.setAttribute('placeholder', `${text.substring(0, current)}${cursor ? '|' : ' '}`)
+        loop()
+      }, end ? 2000 : 300)
+    }
+
+    loop()
+  </script>
+  
+</body>
+</html>
