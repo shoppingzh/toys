@@ -2,21 +2,29 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { getPageWidth } from '@/utils/dom'
 import * as confApi from '@/api/config'
+import * as moduleApi from '@/api/module'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
     pageWidth: getPageWidth(),
-    config: confApi.get()
+    config: confApi.get(),
+    modules: moduleApi.list(),
+    activeModuleId: null,
   },
   mutations: {
     SET_CLIENT_WIDTH: (state, value) => {
       state.pageWidth = value
+    },
+    SET_ACTIVE_MODULE_ID: (state, moduleId) => {
+      state.activeModuleId = moduleId
     }
   },
   getters: {
+    pageWidth: state => state.pageWidth,
     config: state => state.config,
+    modules: state => state.modules,
     mainWidth: state => {
       const conf = state.config
       if (conf.layout === 0) {
@@ -25,8 +33,8 @@ const store = new Vuex.Store({
         return state.pageWidth * 0.75
       }
       return state.pageWidth
-    }
-
+    },
+    activeModule: state => state.modules.find(o => o.id === state.activeModuleId),
   }
 })
 

@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/website-layout'
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/'
 }
