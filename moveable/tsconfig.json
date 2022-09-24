@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "module": "ESNext"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
