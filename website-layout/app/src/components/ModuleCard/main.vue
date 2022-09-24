@@ -27,6 +27,7 @@ export default {
     margin-bottom: 10px;
     cursor: pointer;
     transition: none; // 这个千万不能开
+    user-select: none;
     &__placeholder {
       position: absolute;
       left: 50%;

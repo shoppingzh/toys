@@ -6,6 +6,9 @@
       @mouseenter="show = true"
       @mouseleave="show = false">
       <el-form size="small" label-position="top" label-suffix="：">
+        <el-form-item label="模块">
+          <AddModule @success="handleAddModuleEnd" />
+        </el-form-item>
         <el-form-item label="网站布局形式">
           <el-radio-group v-model="config.layout">
             <el-radio :label="0">标准模式</el-radio>
@@ -15,16 +18,16 @@
         <el-form-item v-if="config.layout === 0" label="网站宽度">
           <el-slider v-model="config.width" :min="750" :max="1920" :marks="widthMarks" />
         </el-form-item>
-        <el-form-item label="开启自由模式">
+        <!-- <el-form-item label="开启自由模式">
           <el-switch v-model="mode" />
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item v-if="config.type === 'column'" label="调整列数">
           <el-input v-model="config.columns" />
         </el-form-item>
         <el-form-item label="其他">
           <div class="tool-bar__actions">
-            <el-button
-              @click="handleAddModule">添加模块</el-button>
+            <!-- <el-button
+              @click="handleAddModule">添加模块</el-button> -->
             <el-button
               @click="handleUpdateColumns">调整列数</el-button>
             <el-button
@@ -50,18 +53,11 @@
 </template>
 
 <script>
-import AddModule from './AddModule'
 import * as api from '@/api/module'
+import { mapGetters } from 'vuex'
 
 export default {
-  components: {
-    AddModule
-  },
   props: {
-    config: {
-      type: Object,
-      default: () => ({})
-    },
     modules: {
       type: Array,
       required: true
@@ -83,6 +79,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['pageWidth', 'mainWidth', 'config']),
     mode: {
       get() {
         return this.config.type === 'free'
@@ -120,8 +117,21 @@ export default {
       }
       this.dialog.add = true
     },
-    handleAddModuleEnd() {
-      this.dialog.add = false
+    handleAddModuleEnd(position) {
+      if (!position) return
+      const x = position.x - (this.pageWidth - this.config.width) / 2
+      if (x < 0) return
+      this.module = {
+        id: +new Date() + Math.random(),
+        name: '模块',
+        in: null,
+        index: null,
+        x: x / this.mainWidth,
+        y: position.y,
+        width: position.width / this.mainWidth,
+        height: position.height,
+        color: null
+      }
       this.modules.push(Object.assign({}, this.module))
     },
     handleUpdateColumns() {
@@ -143,13 +153,13 @@ export default {
 <style lang="scss" scoped>
   .tool-bar {
     position: fixed;
-    z-index: 3;
+    z-index: 9999999999;
     left: 0;
     top: 0;
     bottom: 0;
     padding: 20px;
     width: 300px;
-    box-shadow: 0 0 4px rgba(0, 0, 0, .1), 3px 0 8px rgba(0, 0, 0, .15);
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, .1), 3px 0 18px rgba(0, 0, 0, .1);
     background-color: #fff;
     transition: transform .3s;
     &.is-hide {

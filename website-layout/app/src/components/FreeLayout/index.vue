@@ -16,15 +16,15 @@ import layout from '../mixins/layout'
 import MoveableCard from './MoveableCard'
 import { mapGetters } from 'vuex'
 import _ from 'lodash'
+import hotkeys from 'hotkeys-js'
 
 export default {
   mixins: [layout],
-  components: {
-    MoveableCard
-  },
+  components: { MoveableCard },
   computed: {
     ...mapGetters([
-      'mainWidth'
+      'mainWidth',
+      'activeModule',
     ]),
     styles() {
       return module => {
@@ -47,6 +47,13 @@ export default {
     }
   },
   created() {
+    hotkeys('delete', () => {
+      if (!this.activeModule) return
+      const idx = this.modules.findIndex(o => o.id === this.activeModule.id)
+      console.log(idx)
+      idx >= 0 && this.modules.splice(idx, 1)
+    })
+
     this.$watch('mainWidth', _.debounce(() => {
       this.$refs.modules.forEach(module => {
         module.reloadMoveable()
@@ -70,7 +77,7 @@ export default {
         }
       })
       this.$emit('change', bottom)
-    }
+    },
   }
 }
 </script>

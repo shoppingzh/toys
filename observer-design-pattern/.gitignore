@@ -1,0 +1,14 @@
+node_modules
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# errors
+yarn-error.log
+
+# workspaces
+.vscode
+.idea
+
+# out
+dist

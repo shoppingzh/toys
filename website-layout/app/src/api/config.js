@@ -5,7 +5,7 @@ export function get() {
   return str ? JSON.parse(str) : {
     layout: 0,
     width: 1200,
-    type: 'column',
+    type: 'free',
     columns: '1:3:1'
   }
 }

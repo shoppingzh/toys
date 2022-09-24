@@ -16,6 +16,7 @@ import ColumnLayout from '@/components/ColumnLayout'
 import FreeLayout from '@/components/FreeLayout'
 import ToolBar from '@/components/ToolBar'
 import * as api from '@/api/module'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -27,10 +28,10 @@ export default {
   data() {
     return {
       containerHeight: null,
-      modules: []
     }
   },
   computed: {
+    ...mapGetters(['modules']),
     config() {
       return this.$store.getters['config']
     },
@@ -51,9 +52,6 @@ export default {
         api.save(newVal)
       }
     }
-  },
-  created() {
-    this.modules = api.list()
   },
   methods: {
     handleContainerHeightChange(height) {
