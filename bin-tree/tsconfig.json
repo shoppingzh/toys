@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "outDir": "dist"
+    "outDir": "dist",
+    "module": "CommonJS"
   }
 }
