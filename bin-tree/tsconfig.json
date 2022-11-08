@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "lib": ["ES2015", "DOM"],
+    "module": "UMD"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]

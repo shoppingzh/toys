@@ -4,42 +4,73 @@ interface TreeNode {
   val: number
 }
 
+// const root: TreeNode = {
+//   val: 1,
+//   left: {
+//     val: 2,
+//     left: {
+//       val: 4,
+//       left: {
+//         val: 8
+//       },
+//       right: {
+//         val: 9
+//       }
+//     },
+//     right: {
+//       val: 5
+//     }
+//   },
+//   right: {
+//     val: 3,
+//     left: {
+//       val: 6,
+//       left: {
+//         val: 10
+//       },
+//       right: {
+//         val: 11,
+//         left: {
+//           val: 12,
+//         },
+//         right: {
+//           val: 13,
+//         }
+//       }
+//     },
+//     right: {
+//       val: 7
+//     }
+//   }
+// }
+
 const root: TreeNode = {
   val: 1,
   left: {
     val: 2,
     left: {
-      val: 4,
+      val: 3,
+      left: {
+        val: 4
+      },
+      right: {
+        val: 5
+      }
+    }
+  },
+  right: {
+    val: 6,
+    right: {
+      val: 7,
       left: {
         val: 8
       },
       right: {
-        val: 9
-      }
-    },
-    right: {
-      val: 5
-    }
-  },
-  right: {
-    val: 3,
-    left: {
-      val: 6,
-      left: {
-        val: 10
-      },
-      right: {
-        val: 11,
-        left: {
-          val: 12,
-        },
+        val: 9,
         right: {
-          val: 13,
+          val: 10
         }
       }
-    },
-    right: {
-      val: 7
     }
   }
 }
@@ -54,13 +85,13 @@ const items: Item[] = []
 function travelsal(root: TreeNode) {
   if (!root) return
   items.push({ val: root.val, type: 'before' })
-  console.log(`--before ${root.val}`)
+  console.log(`P ${root.val}`)
   travelsal(root.left)
   items.push({ val: root.val, type: 'middle' })
-  console.log(`--middle ${root.val}`)
+  console.log(`M ${root.val}`)
   travelsal(root.right)
   items.push({ val: root.val, type: 'after' })
-  console.log(`--after ${root.val}`)
+  console.log(`A ${root.val}`)
 }
 
 travelsal(root)
