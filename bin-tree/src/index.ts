@@ -1,28 +1,108 @@
-import root, { TreeNode } from './data'
+interface TreeNode {
+  left?: TreeNode
+  right?: TreeNode
+  val: number
+}
 
-function iterate(root: TreeNode) {
-  const queue: TreeNode[] = [root]
-  while (queue.length) {
-    const node = queue.shift()
-    console.log(node.val)
-    for (let child of [node.left, node.right]) {
-      child && queue.push(child)
+// const root: TreeNode = {
+//   val: 1,
+//   left: {
+//     val: 2,
+//     left: {
+//       val: 4,
+//       left: {
+//         val: 8
+//       },
+//       right: {
+//         val: 9
+//       }
+//     },
+//     right: {
+//       val: 5
+//     }
+//   },
+//   right: {
+//     val: 3,
+//     left: {
+//       val: 6,
+//       left: {
+//         val: 10
+//       },
+//       right: {
+//         val: 11,
+//         left: {
+//           val: 12,
+//         },
+//         right: {
+//           val: 13,
+//         }
+//       }
+//     },
+//     right: {
+//       val: 7
+//     }
+//   }
+// }
+
+const root: TreeNode = {
+  val: 1,
+  left: {
+    val: 2,
+    left: {
+      val: 3,
+      left: {
+        val: 4
+      },
+      right: {
+        val: 5
+      }
+    }
+  },
+  right: {
+    val: 6,
+    right: {
+      val: 7,
+      left: {
+        val: 8
+      },
+      right: {
+        val: 9,
+        right: {
+          val: 10
+        }
+      }
     }
   }
 }
 
-// 前序遍历 - 递归
-function iterate2(node: TreeNode) {
-  if (!node) return
-  console.log(node.val)
-  iterate2(node.left)
-  iterate2(node.right)
+interface Item {
+  val: number
+  type: 'before' | 'middle' | 'after'
 }
 
+const items: Item[] = []
 
-// 前序遍历 - 非递归
-function iterate3(node: TreeNode) {
-  
+function travelsal(root: TreeNode) {
+  if (!root) return
+  items.push({ val: root.val, type: 'before' })
+  console.log(`P ${root.val}`)
+  travelsal(root.left)
+  items.push({ val: root.val, type: 'middle' })
+  console.log(`M ${root.val}`)
+  travelsal(root.right)
+  items.push({ val: root.val, type: 'after' })
+  console.log(`A ${root.val}`)
 }
 
-iterate2(root)
+travelsal(root)
+
+const doc = document.createDocumentFragment()
+const els = items.forEach(o => {
+  const el = document.createElement('div')
+  el.classList.add('item')
+  el.classList.add(o.type)
+  el.innerText = `${o.val}`
+  doc.appendChild(el)
+})
+
+document.body.appendChild(doc)
