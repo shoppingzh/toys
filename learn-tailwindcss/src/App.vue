@@ -20,7 +20,7 @@
 
   <div class="div" />
 
-  <div class="hello w-32 h-32 bg-blue-500" />
+  <div class="hello w-32 h-32 bg-green-500" />
 </template>
 
 <style>
@@ -32,9 +32,9 @@
   border-top: 1px solid theme('colors.gray.200');
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .hello {
-    @apply bg-green-500;
+    @apply bg-blue-500;
   }
 }
 
