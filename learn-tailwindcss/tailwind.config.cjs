@@ -6,5 +6,11 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  presets: [
+    require('./tailwind.preset.cjs')
+  ],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+    '@tailwindcss/aspect-ratio',
+  ],
 }
