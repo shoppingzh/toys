@@ -1,6 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@tailwindcss/aspect-ratio': ^0.4.2
+  '@tailwindcss/line-clamp': ^0.4.2
   '@vitejs/plugin-vue': ^4.0.0
   autoprefixer: ^10.4.13
   postcss: ^8.4.20
@@ -12,6 +14,8 @@ dependencies:
   vue: 3.2.45
 
 devDependencies:
+  '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.4
+  '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.4
   '@vitejs/plugin-vue': 4.0.0_vite@4.0.1+vue@3.2.45
   autoprefixer: 10.4.13_postcss@8.4.20
   postcss: 8.4.20
@@ -260,6 +264,22 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.14.0
+    dev: true
+
+  /@tailwindcss/aspect-ratio/0.4.2_tailwindcss@3.2.4:
+    resolution: {integrity: sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
+      tailwindcss: 3.2.4_postcss@8.4.20
+    dev: true
+
+  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.2.4:
+    resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
+      tailwindcss: 3.2.4_postcss@8.4.20
     dev: true
 
   /@vitejs/plugin-vue/4.0.0_vite@4.0.1+vue@3.2.45:

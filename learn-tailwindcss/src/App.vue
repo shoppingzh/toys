@@ -25,7 +25,7 @@
 
 <style>
 .menu {
-  @apply p-2 text-gray-900 font-semibold;
+  @apply p-2 text-gray-900 dark:text-gray-100 font-semibold;
 }
 
 .div {
