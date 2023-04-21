@@ -1,0 +1,15 @@
+{
+  "background_color": "#000",
+  "description": "测试一下",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "icon/fox-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "测试App",
+  "short_name": "测试App",
+  "start_url": "/index.html"
+}
